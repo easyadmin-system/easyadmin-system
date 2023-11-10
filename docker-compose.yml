@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile
       context: ./components/easyadmin-frontend
       target: production
+    container_name: frontend
     command: npm run start
     volumes:
       - ./components/easyadmin-frontend:/srv/app
