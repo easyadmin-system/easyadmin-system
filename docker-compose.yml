@@ -43,7 +43,7 @@ services:
       - ./sql/setup.sql:/temp/init.sql
     environment:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    entrypoint: [ "bash", "-c", "sleep 10 && mysql -u root -p${MYSQL_PASSWORD} --host=mysql --port=3306 /temp/init.sql && exit"] 
+    entrypoint: [ "bash", "-c", "sleep 10 && mysql -u root -p${DB_ROOT_PASSWORD} --host=mysql --port=3306 /temp/init.sql && exit"] 
     depends_on:
       - mysql
 
