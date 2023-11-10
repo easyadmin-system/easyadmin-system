@@ -4,11 +4,11 @@ services:
   frontend:
     build:
       dockerfile: Dockerfile
-      context: ./easyadmin-frontend
+      context: ./components/easyadmin-frontend
       target: production
     command: npm run start
     volumes:
-      - ./easyadmin-frontend:/srv/app
+      - ./components/easyadmin-frontend:/srv/app
       - /srv/app/node_modules
     ports:
       - "4200:4200"
