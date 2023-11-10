@@ -61,7 +61,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_PORT: ${DB_PORT}
-    entrypoint: [ "bash", "-c", "sleep 10 && mysql -u root -p${DB_ROOT_PASSWORD} --host=mysql --port=3306 /temp/init.sql && exit"] 
+    entrypoint: [ "bash", "-c", "sleep 10 && mysql -u root -p${DB_ROOT_PASSWORD} --host=mysql --port=${DB_PORT} /temp/init.sql && exit"] 
     depends_on:
       - mysql
 
