@@ -1,19 +1,19 @@
 version: "3.8"
 
 services:
-  # frontend:
-  #   build:
-  #     dockerfile: Dockerfile
-  #     context: ./easyadmin-frontend
-  #     target: development
-  #   command: npm run start
-  #   volumes:
-  #     - ./easyadmin-frontend:/srv/app
-  #     - /srv/app/node_modules
-  #   ports:
-  #     - "4200:4200"
-  #   depends_on:
-  #     - api
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: ./easyadmin-frontend
+      target: production
+    command: npm run start
+    volumes:
+      - ./easyadmin-frontend:/srv/app
+      - /srv/app/node_modules
+    ports:
+      - "4200:4200"
+    depends_on:
+      - api
 
   api:
     build:
