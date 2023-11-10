@@ -98,7 +98,7 @@ Easy Admin System - CMS focused on easy use - Docker compose skeleton
 |------------|--------------------|-------------------------|------|---------------------|
 | api        | easyadmin-core     | Backend with REST API   | 3000 | Running service     |
 | frontend   | easyadmin-frontend | Frontend UI in Angular  | 4200 | Running HTTP server |
-| mysql      | -                  | MySQL database instance | 3306 | Running service     |
+| mysql      | -                  | MySQL database instance | 6033 | Running service     |
 | mysql_init | -                  | MySQL initialization    | -    | Terminated shortly  |
 | phpmyadmin | -                  | phpMyAdmin tool         |      | Running service     |
 

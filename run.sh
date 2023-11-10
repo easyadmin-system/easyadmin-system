@@ -26,6 +26,9 @@ git submodule init
 echo " → Updating GIT submodules..."
 git submodule update
 
+echo " → Writing easyadmin-core configuration file..."
+cp components/easyadmin-core/.env-example components/easyadmin-core/.env
+
 echo " → Building Docker containers with Compose..."
 docker-compose build
 

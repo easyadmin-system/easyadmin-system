@@ -31,7 +31,13 @@ services:
     depends_on:
       - mysql
     environment:
-      JWT_SECRET: hlaskdhaio1237891aa
+      DB_DIALECT: ${DB_DIALECT}
+      DB_HOST: ${DB_HOST}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_PORT: ${DB_PORT}
+      # JWT_SECRET: hlaskdhaio1237891aa
     ports:
       - "3000:3000"
 
@@ -39,14 +45,11 @@ services:
     image: mysql:8.0
     container_name: mysql
     environment:
-      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      DB_DATABASE: ${DB_DATABASE}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     networks:
       - default
     ports:
-      - "3306:3306"
+      - "${DB_PORT}:3306"
     volumes:
       - dbdata:/var/lib/mysql
 
@@ -56,7 +59,8 @@ services:
     volumes:
       - ./sql/init.sql:/temp/init.sql
     environment:
-      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_PORT: ${DB_PORT}
     entrypoint: [ "bash", "-c", "sleep 10 && mysql -u root -p${DB_ROOT_PASSWORD} --host=mysql --port=3306 /temp/init.sql && exit"] 
     depends_on:
       - mysql
