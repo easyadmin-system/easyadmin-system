@@ -4,11 +4,11 @@ services:
   api:
     build:
       dockerfile: Dockerfile
-      context: ./easyadmin-core
+      context: ./components/easyadmin-core
       target: production
     container_name: api
     volumes:
-      - ./easyadmin-core:/srv/app
+      - ./components/easyadmin-core:/srv/app
       - /srv/app/node_modules
       - /srv/app/dist
     command: npm run start:prod
@@ -17,6 +17,7 @@ services:
     depends_on:
       - mysql
     environment:
+      JWT_SECRET: hlaskdhaio1237891aa
     ports:
       - "3000:3000"
 
