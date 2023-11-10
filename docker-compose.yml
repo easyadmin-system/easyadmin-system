@@ -1,0 +1,63 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: ./easyadmin-core
+      target: production
+    container_name: api
+    volumes:
+      - ./easyadmin-core:/srv/app
+      - /srv/app/node_modules
+      - /srv/app/dist
+    command: npm run start:prod
+    links:
+      - mysql
+    depends_on:
+      - mysql
+    environment:
+    ports:
+      - "3000:3000"
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - default
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  mysql_init:
+    image: mysql:8.0
+    container_name: mysql_init
+    volumes:
+      - ./sql/setup.sql:/temp/init.sql
+    environment:
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    entrypoint: [ "bash", "-c", "sleep 10 && mysql -u root -p${MYSQL_PASSWORD} --host=mysql --port=3306 /temp/init.sql && exit"] 
+    depends_on:
+      - mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8081:80
+
+volumes:
+  dbdata:
