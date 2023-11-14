@@ -1,26 +1,26 @@
 version: "3.8"
 
 services:
-  frontend:
-    build:
-      dockerfile: Dockerfile
-      context: ./components/easyadmin-frontend
-      target: production
-    container_name: frontend
-    command: npm run start
-    volumes:
-      - ./components/easyadmin-frontend:/srv/app
-      - /srv/app/node_modules
-    ports:
-      - "4200:4200"
-    depends_on:
-      - api
+  # frontend:
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: ./components/easyadmin-frontend
+  #     target: ${ENV}
+  #   container_name: frontend
+  #   command: npm run start
+  #   volumes:
+  #     - ./components/easyadmin-frontend:/srv/app
+  #     - /srv/app/node_modules
+  #   ports:
+  #     - "4200:4200"
+  #   depends_on:
+  #     - api
 
   api:
     build:
       dockerfile: Dockerfile
       context: ./components/easyadmin-core
-      target: production
+      target: ${ENV}
     container_name: api
     volumes:
       - ./components/easyadmin-core:/srv/app
@@ -32,13 +32,14 @@ services:
     depends_on:
       - mysql
     environment:
+      ENV: ${ENV}
       DB_DIALECT: ${DB_DIALECT}
       DB_HOST: ${DB_HOST}
       DB_DATABASE: ${DB_DATABASE}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_PORT: ${DB_PORT}
-      # JWT_SECRET: hlaskdhaio1237891aa
+      JWT_SECRET: ${JWT_SECRET}
     ports:
       - "3000:3000"
 
@@ -47,26 +48,26 @@ services:
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
     networks:
       - default
     ports:
-      - "${DB_PORT}:3306"
+      - "${DB_PORT}:${DB_PORT}"
+    expose:
+      - "${DB_PORT}"
     volumes:
       - dbdata:/var/lib/mysql
 
   mysql_init:
     image: mysql:8.0
     container_name: mysql_init
-    volumes:
-      - ./sql/init.sql:/temp/init.sql
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_PORT: ${DB_PORT}
-    entrypoint: [ "bash", "-c", "sleep 10 && mysql -u root -p${DB_ROOT_PASSWORD} --host=mysql --port=${DB_PORT} /temp/init.sql && exit"] 
+    entrypoint: [ "bash", "-c", "sleep 10 && mysql -u root -p${DB_ROOT_PASSWORD} --host=mysql --port=${DB_PORT} < /temp/init.sql && exit"] 
     depends_on:
       - mysql
+    volumes:
+      - ./data/db/mysql/init.sql:/temp/init.sql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
