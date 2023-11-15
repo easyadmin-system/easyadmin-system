@@ -21,14 +21,14 @@ Easy Admin System - CMS focused on easy use - Docker compose skeleton
   - [Table of Contents](#table-of-contents)
   - [Related repositories](#related-repositories)
   - [Getting Started](#getting-started)
-    - [Start](#start)
     - [Prerequisites](#prerequisites)
+    - [Quick run](#quick-run)
     - [Installation](#installation)
     - [Run containers](#run-containers)
   - [Structure](#structure)
     - [Services](#services)
     - [Directories](#directories)
-  - [Contributing](#development)
+  - [Contributing](#contributing)
     - [Recommendations](#recommendations)
     - [Git Branches](#git-branches)
   - [License](#license)
@@ -49,6 +49,12 @@ Easy Admin System - CMS focused on easy use - Docker compose skeleton
   * [Docker](https://docs.docker.com/get-docker/) on your local machine. **<span style="color:red">(required)</span>**
   * [MySQL server](https://dev.mysql.com/doc/refman/8.0/en/installing.html) on your local machine. _(optional)_
   * Create manually a new database (preferably with charset `utf8mb4` and collation `utf8mb4_unicode_ci`). _(optional)_
+
+
+
+### Quick run
+You can install and run the application in Docker just simply with run `sh run.sh` script!
+
 
 
 ### Installation
