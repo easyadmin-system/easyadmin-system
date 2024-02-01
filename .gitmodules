@@ -1,3 +1,6 @@
 [submodule "components/easyadmin-core"]
 	path = components/easyadmin-core
 	url = git@github.com:easyadmin-system/easyadmin-core.git
+[submodule "components/easyadmin-frontend"]
+	path = components/easyadmin-frontend
+	url = git@github.com:easyadmin-system/easyadmin-frontend.git
