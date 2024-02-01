@@ -12,7 +12,7 @@ Easy Admin System - CMS focused on easy use - Docker compose skeleton
 
 * **Easy Admin System v4** - *CMS focused on easy use*
 * Version: __4.0__
-* Docker compose skeleton using Docker containers with Node.js / NestJS API, Angular Frontend, MySQL & phpMyAdmin
+* Docker compose skeleton using Docker containers with Node.js / NestJS API, React Frontend, MySQL & phpMyAdmin
 * Author & Maintainer: Jan Elznic – [Homepage](https://janelznic.cz) – [Github](https://github.com/janelznic) – [GitLab](https://gitlab.elznic.net/janelznic) – [LinkedIn](https://linkedin.com/in/janelznic/)
 
 
@@ -37,7 +37,7 @@ Easy Admin System - CMS focused on easy use - Docker compose skeleton
 ## Related repositories
 * [Docker compose skeleton](https://github.com/easyadmin-system/easyadmin-system) - (easyadmin-system) **(this repository)**
 * [Backend API in Node.js](https://github.com/easyadmin-system/easyadmin-core) - (easyadmin-core)
-* [Frontend in Angular](https://github.com/easyadmin-system/easyadmin-frontend) - (easyadmin-frontend)
+* [Frontend in React](https://github.com/easyadmin-system/easyadmin-frontend) - (easyadmin-frontend)
 
 
 ## Getting Started
